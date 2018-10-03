@@ -1,0 +1,16 @@
+<suite name="TMDB" verbose="1">
+ 	<parameter name="apiUrl" value="no_api_url" />
+ 	<parameter name="apiKey" value="no_api_key" />
+ 	<listeners>
+ 		<listener class-name="com.tmdb.suites.SuiteListener"></listener>
+ 	</listeners>
+	<test name="Regression">
+		<classes>
+		    <class name="com.tmdb.tests.genres.TestGenres">
+				<methods>
+					<include name="verifyGenreIsPresent"></include>
+				</methods>
+			</class>
+		</classes>
+    </test>
+</suite>
