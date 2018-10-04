@@ -1,6 +1,9 @@
-package com.tmdb.tests.genres;
+package com.tmdb.tests.movies;
 
-import com.tmdb.genres.Genres;
+import java.util.List;
+
+import com.tmdb.movies.MovieCompaniesItem;
+import com.tmdb.movies.Movies;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -8,7 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class TestGenres{
+public class TestMovies{
 	
 	private String mainApiUrl;
 	private String mainApiKey;
@@ -25,19 +28,16 @@ public class TestGenres{
     	}
      }  
 
-	@DataProvider(name = "Genres")
+	@DataProvider(name = "Movies")
     public static Object[][] genres() {	  
-        return new Object[][] { { "Comedy"}, { "Action"}};
+        return new Object[][] { { 100}, { 245}};
     }
 	
-	@Test(dataProvider = "Genres", description = "Verify that choosen genre is present on genres catalog")
-	public void verifyGenreIsPresent(String genre){
-		Genres genres = new Genres(this.mainApiUrl, this.mainApiKey);
-		boolean result = genres.isGenrePresent(genre);
-		if (result){
-			System.out.println(genre + " genre was present");
-		}
-		Assert.assertTrue(result, genre + " genre was not present");
+	@Test(dataProvider = "Movies", description = "Verify that each company from movie exists and its name matches")
+	public void verifyMovieCompaniesExistAndNameMatch(int movieId){
+		Movies movies = new Movies(this.mainApiUrl, this.mainApiKey);
+		boolean result = movies.movieCompaniesExistAndMatchName(movieId);
+		Assert.assertTrue(result, "Not all companies from Movie ID " + Integer.toString(movieId) + " exist on companies catalog");
 	}
 	
 }

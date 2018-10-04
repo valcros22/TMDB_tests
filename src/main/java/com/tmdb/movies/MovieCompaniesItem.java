@@ -1,6 +1,6 @@
-package com.tmdb.genres;
+package com.tmdb.movies;
 
-public class GenreItem {
+public class MovieCompaniesItem {
     int id;
     String name;
  
@@ -11,5 +11,4 @@ public class GenreItem {
     public String getName() {
         return this.name;
     }
-
 }

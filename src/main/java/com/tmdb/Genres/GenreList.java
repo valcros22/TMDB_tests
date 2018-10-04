@@ -1,4 +1,4 @@
-package com.tmdb.Genres;
+package com.tmdb.genres;
 
 import java.util.List;
 

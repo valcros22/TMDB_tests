@@ -4,11 +4,11 @@
  	<listeners>
  		<listener class-name="com.tmdb.suites.SuiteListener"></listener>
  	</listeners>
-	<test name="RegressionGenres">
+	<test name="RegressionMovies">
 		<classes>
-		    <class name="com.tmdb.tests.genres.TestGenres">
+		    <class name="com.tmdb.tests.movies.TestMovies">
 				<methods>
-					<include name="verifyGenreIsPresent"></include>
+					<include name="verifyMovieCompaniesExistAndNameMatch"></include>
 				</methods>
 			</class>
 		</classes>

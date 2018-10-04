@@ -1,4 +1,4 @@
-package com.tmdb.Genres;
+package com.tmdb.genres;
 
 import java.io.IOException;
 import java.util.List;

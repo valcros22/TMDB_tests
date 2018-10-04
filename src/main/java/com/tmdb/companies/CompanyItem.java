@@ -1,6 +1,6 @@
-package com.tmdb.genres;
+package com.tmdb.companies;
 
-public class GenreItem {
+public class CompanyItem {
     int id;
     String name;
  
