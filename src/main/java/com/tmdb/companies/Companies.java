@@ -25,7 +25,13 @@ public class Companies extends RetrofitClient{
 	        Call<CompanyItem> call = this.client.fetchCompany(Integer.toString(companyId), this.apiKey);
 	        try {
 				Response<CompanyItem> response = call.execute();
-				return response.body();
+	        	if (response.code() != 401){
+	        		return response.body();
+	        	}
+	        	else{
+	        		System.out.println("The API key "+ this.apiKey +" was unauthorized");
+	        		return null;
+	        	}
 			} catch (IOException e) {
 				System.out.println("There was an error in company request : ");
 				e.printStackTrace();

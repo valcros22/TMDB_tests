@@ -2,8 +2,10 @@ package com.tmdb.discover;
 
 import java.io.IOException;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Response;
+
 import com.tmdb.interfaces.DiscoveriesAPIService;
 import com.tmdb.movies.MovieGenreItem;
 import com.tmdb.RetrofitClient;
@@ -24,7 +26,13 @@ public class Discoveries extends RetrofitClient{
         Call<DiscoverList> call = this.client.fetchDiscoveries(this.apiKey, origLan, relDate, genres);
         try {
 			Response<DiscoverList> response = call.execute();
-			return response.body().getResults();
+        	if (response.code() != 401){
+        		return response.body().getResults();
+        	}
+        	else{
+        		System.out.println("The API key "+ this.apiKey +" was unauthorized");
+        		return null;
+        	}
 		} catch (IOException e) {
 			System.out.println("There was an error in genres request : ");
 			e.printStackTrace();

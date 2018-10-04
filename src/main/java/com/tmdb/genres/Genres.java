@@ -24,8 +24,14 @@ public class Genres extends RetrofitClient{
 	public void retrieveGenres(){
         Call<GenreList> call = this.client.fetchGenres(this.apiKey);
         try {
-			Response<GenreList> response = call.execute();
-			this.genres = response.body().getGenres();
+        	Response<GenreList> response = call.execute();
+        	if (response.code() != 401){
+        		this.genres = response.body().getGenres();
+        	}
+        	else{
+        		System.out.println("The API key "+ this.apiKey +" was unauthorized");
+        		this.genres = null;
+        	}
 		} catch (IOException e) {
 			System.out.println("There was an error in genres request : ");
 			e.printStackTrace();

@@ -2,8 +2,10 @@ package com.tmdb.movies;
 
 import java.io.IOException;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Response;
+
 import com.tmdb.interfaces.MoviesAPIService;
 import com.tmdb.RetrofitClient;
 import com.tmdb.companies.Companies;
@@ -50,7 +52,13 @@ public class Movies extends RetrofitClient{
         Call<MovieItem> call = this.client.fetchMovie(Integer.toString(movieId), this.apiKey);
         try {
 			Response<MovieItem> response = call.execute();
-			return response.body();
+        	if (response.code() != 401){
+        		return response.body();
+        	}
+        	else{
+        		System.out.println("The API key "+ this.apiKey +" was unauthorized");
+        		return null;
+        	}
 		} catch (IOException e) {
 			System.out.println("There was an error in movie request : ");
 			e.printStackTrace();
