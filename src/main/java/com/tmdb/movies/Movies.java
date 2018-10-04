@@ -2,27 +2,26 @@ package com.tmdb.movies;
 
 import java.io.IOException;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Response;
-
 import com.tmdb.interfaces.MoviesAPIService;
-import com.tmdb.utils.RetrofitClient;
+import com.tmdb.RetrofitClient;
 import com.tmdb.companies.Companies;
 
-public class Movies {
+public class Movies extends RetrofitClient{
 	
 	private String url = "";
 	private String apiKey = "";
+	private MoviesAPIService client = null;
 	
 	public Movies(String url, String apiKey){
 		this.url = url;
 		this.apiKey = apiKey;
+		this.client = super.getRetrofitClient(this.url).create(MoviesAPIService.class);
 	}
 	
 	public List<MovieCompaniesItem> getMovieCompanies(int movieId){
-		MoviesAPIService client = RetrofitClient.getClient(this.url).create(MoviesAPIService.class);
-        Call<MovieItem> call = client.fetchMovie(Integer.toString(movieId), this.apiKey);
+        Call<MovieItem> call = this.client.fetchMovie(Integer.toString(movieId), this.apiKey);
         try {
 			Response<MovieItem> response = call.execute();
 			return response.body().getProductionCompaniesList();
@@ -48,8 +47,7 @@ public class Movies {
 	}
 	
 	public MovieItem getMovieData(int movieId){
-		MoviesAPIService client = RetrofitClient.getClient(this.url).create(MoviesAPIService.class);
-        Call<MovieItem> call = client.fetchMovie(Integer.toString(movieId), this.apiKey);
+        Call<MovieItem> call = this.client.fetchMovie(Integer.toString(movieId), this.apiKey);
         try {
 			Response<MovieItem> response = call.execute();
 			return response.body();

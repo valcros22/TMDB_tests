@@ -1,7 +1,6 @@
-package com.tmdb.suites;
+package com.tmdb.suites.listeners;
 
 import java.util.Map;
-
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 

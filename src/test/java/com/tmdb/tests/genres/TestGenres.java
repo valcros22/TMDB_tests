@@ -1,7 +1,6 @@
 package com.tmdb.tests.genres;
 
 import com.tmdb.genres.Genres;
-
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -34,10 +33,15 @@ public class TestGenres{
 	public void verifyGenreIsPresent(String genre){
 		Genres genres = new Genres(this.mainApiUrl, this.mainApiKey);
 		boolean result = genres.isGenrePresent(genre);
-		if (result){
-			System.out.println(genre + " genre was present");
-		}
 		Assert.assertTrue(result, genre + " genre was not present");
+	}
+	
+	public void verifyGenreIsNotPresent(String genre){
+		// TODO : this test will ensure that the genre used is not on the API base.
+	}
+	
+	public void verifyGenreNotRepeated(String genre){
+		// TODO : this test will ensure that the genre does not have more than 1 entry on the results
 	}
 	
 }

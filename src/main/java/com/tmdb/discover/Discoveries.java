@@ -1,29 +1,27 @@
 package com.tmdb.discover;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Response;
-
 import com.tmdb.interfaces.DiscoveriesAPIService;
 import com.tmdb.movies.MovieGenreItem;
-import com.tmdb.utils.RetrofitClient;
+import com.tmdb.RetrofitClient;
 
-public class Discoveries {
+public class Discoveries extends RetrofitClient{
 	
 	private String url = "";
 	private String apiKey = "";
+	private DiscoveriesAPIService client = null;
 	
 	public Discoveries(String url, String apiKey){
 		this.url = url;
 		this.apiKey = apiKey;
+		this.client = super.getRetrofitClient(this.url).create(DiscoveriesAPIService.class);
 	}
 	
 	public List<DiscoverItem> getDiscoveries(String relDate, String origLan, String genres){
-		DiscoveriesAPIService client = RetrofitClient.getClient(this.url).create(DiscoveriesAPIService.class);
-        Call<DiscoverList> call = client.fetchDiscoveries(this.apiKey, origLan, relDate, genres);
+        Call<DiscoverList> call = this.client.fetchDiscoveries(this.apiKey, origLan, relDate, genres);
         try {
 			Response<DiscoverList> response = call.execute();
 			return response.body().getResults();

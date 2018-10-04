@@ -1,8 +1,8 @@
 package com.tmdb.interfaces;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-
 import com.tmdb.discover.DiscoverList;
 
 public interface DiscoveriesAPIService {

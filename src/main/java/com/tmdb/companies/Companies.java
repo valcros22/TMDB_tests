@@ -6,22 +6,23 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import com.tmdb.interfaces.CompaniesAPIService;
-import com.tmdb.utils.RetrofitClient;
+import com.tmdb.RetrofitClient;
 
-public class Companies {
+public class Companies extends RetrofitClient{
 	
 	private String url = "";
 	private String apiKey = "";
+	private CompaniesAPIService client = null;
 	
 	public Companies(String url, String apiKey){
 		this.url = url;
 		this.apiKey = apiKey;
+		this.client = super.getRetrofitClient(this.url).create(CompaniesAPIService.class);
 	}
 	
 	public CompanyItem getCompany(int companyId){
 		if (companyId >= 0){
-			CompaniesAPIService client = RetrofitClient.getClient(this.url).create(CompaniesAPIService.class);
-	        Call<CompanyItem> call = client.fetchCompany(Integer.toString(companyId), this.apiKey);
+	        Call<CompanyItem> call = this.client.fetchCompany(Integer.toString(companyId), this.apiKey);
 	        try {
 				Response<CompanyItem> response = call.execute();
 				return response.body();
@@ -52,6 +53,7 @@ public class Companies {
 		}
 		return false;	
 	}
+
 }
 
 

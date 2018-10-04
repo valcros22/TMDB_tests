@@ -2,28 +2,27 @@ package com.tmdb.genres;
 
 import java.io.IOException;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Response;
-
 import com.tmdb.interfaces.GenresAPIService;
-import com.tmdb.utils.RetrofitClient;
+import com.tmdb.RetrofitClient;
 
-public class Genres {
+public class Genres extends RetrofitClient{
 	
 	private String url = "";
 	private String apiKey = "";
 	private List<GenreItem> genres = null;
+	private GenresAPIService client = null;
 	
 	public Genres(String url, String apiKey){
 		this.url = url;
 		this.apiKey = apiKey;
+		this.client  = super.getRetrofitClient(this.url).create(GenresAPIService.class);
 		this.retrieveGenres();
 	}
 	
 	public void retrieveGenres(){
-		GenresAPIService client = RetrofitClient.getClient(this.url).create(GenresAPIService.class);
-        Call<GenreList> call = client.fetchGenres(this.apiKey);
+        Call<GenreList> call = this.client.fetchGenres(this.apiKey);
         try {
 			Response<GenreList> response = call.execute();
 			this.genres = response.body().getGenres();

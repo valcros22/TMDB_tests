@@ -2,7 +2,7 @@
  	<parameter name="apiUrl" value="no_api_url" />
  	<parameter name="apiKey" value="no_api_key" />
  	<listeners>
- 		<listener class-name="com.tmdb.suites.SuiteListener"></listener>
+ 		<listener class-name="com.tmdb.suites.listeners.SuiteListener"></listener>
  	</listeners>
 	<test name="RegressionGenres">
 		<classes>
